@@ -1,2 +1,2 @@
 wait_for_db refactoring
-django-scheduler
+django-scheduler (background or another container?)
