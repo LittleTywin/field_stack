@@ -8,6 +8,7 @@ services:
       - 8002:8000
     volumes: 
       - ./django_app/code:/code
+      - ./django_app/data:/data
     command: ["dev.run.sh"]
     depends_on:
       - django_db

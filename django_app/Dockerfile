@@ -14,6 +14,11 @@ RUN python -m venv /py && \
     apk del .build-deps && \
     adduser --disabled-password --no-create-home app
 
+RUN mkdir -p /data/web/static && \
+    mkdir -p /data/web/media && \
+    chown -R app:app /data && \
+    chmod -R 755 /data
+
 COPY ./code /code
 COPY ./scripts /scripts
 RUN chmod +x /scripts/*
