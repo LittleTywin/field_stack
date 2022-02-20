@@ -7,14 +7,15 @@ COPY ./requirements.txt /requirements.txt
 
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
-    apk add --update --no-cache postgresql-client && \
-    apk add --update --no-cache --virtual .build-deps \
+    apk add --update --no-cache postgresql-client 
+
+RUN apk add --update --no-cache --virtual .build-deps \
         build-base postgresql-dev musl-dev linux-headers && \
     /py/bin/pip install -r /requirements.txt && \
-    apk del .build-deps && \
-    adduser --disabled-password --no-create-home app
+    apk del .build-deps
 
-RUN mkdir -p /data/web/static && \
+RUN adduser --disabled-password --no-create-home app && \
+    mkdir -p /data/web/static && \
     mkdir -p /data/web/media && \
     chown -R app:app /data && \
     chmod -R 755 /data
