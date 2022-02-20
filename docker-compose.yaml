@@ -9,4 +9,17 @@ services:
     volumes: 
       - ./django_app/code:/code
     command: ["dev.run.sh"]
+    depends_on:
+      - django_db
+    env_file:
+      - env_files/dev.env
 
+  django_db:
+    image: postgres:14.2-alpine3.15
+    env_file:
+      - env_files/dev.env
+    volumes:
+      - django_db_data_dev:/var/lib/postgresql/data
+
+volumes:
+  django_db_data_dev:

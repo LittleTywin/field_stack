@@ -22,3 +22,5 @@ WORKDIR /code
 ENV PATH="/scripts:/py/bin:$PATH"
 
 USER app
+
+EXPOSE 8000
