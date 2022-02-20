@@ -1,26 +1,39 @@
 version: '3.7'
 
 services:
-  django_app:
+  djangoapp:
     build:
-      context: ./django_app
+      context: ./djangoapp
     ports:
       - 8002:8000
     volumes: 
-      - ./django_app/code:/code
-      - ./django_app/data:/data
+      - ./djangoapp/code:/code
+      - ./djangoapp/data:/data
     command: ["dev.run.sh"]
     depends_on:
-      - django_db
+      - djangodb
     env_file:
-      - env_files/dev.env
+      - env_files/django.dev.env
 
-  django_db:
+  djangodb:
     image: postgres:14.2-alpine3.15
     env_file:
-      - env_files/dev.env
+      - env_files/django.dev.env
     volumes:
-      - django_db_data_dev:/var/lib/postgresql/data
+      - djangodb_data_dev:/var/lib/postgresql/data
 
+  pi_worker:
+    build:
+      context: ./pi_worker
+    volumes:
+      - ./pi_worker/code:/code
+      - /sys:/sys
+    devices:
+      - /dev/gpiomem:/dev/gpiomem
+    env_file:
+      - env_files/pi.dev.env
+    depends_on:
+      - djangoapp
+      
 volumes:
-  django_db_data_dev:
+  djangodb_data_dev:
