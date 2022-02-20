@@ -7,16 +7,14 @@ COPY ./requirements.txt /requirements.txt
 
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
-    apk add --update --no-cache postgresql-client pcre-dev
+    apk add --update --no-cache postgresql-client
 
 RUN apk add --update --no-cache --virtual .build-deps \
-        build-base postgresql-dev musl-dev linux-headers python3-dev && \
+        build-base postgresql-dev musl-dev linux-headers && \
     /py/bin/pip install -r /requirements.txt && \
     apk del .build-deps
 
 RUN adduser --disabled-password --no-create-home app && \
-    addgroup -g 997 gpio && \
-    adduser app gpio && \
     mkdir -p /data/web/static && \
     mkdir -p /data/web/media && \
     chown -R app:app /data && \

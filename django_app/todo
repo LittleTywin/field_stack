@@ -1,4 +1,5 @@
 wait_for_db refactoring
-django-scheduler
-check if pcre-dev can be removed from final container
+clean django-scheduler elements (not needed)
 use rest-api for pi-django communication
+csrf management for pi post
+create new container for pi stuff

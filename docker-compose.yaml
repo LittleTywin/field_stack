@@ -9,9 +9,6 @@ services:
     volumes: 
       - ./django_app/code:/code
       - ./django_app/data:/data
-      - /sys:/sys
-    devices:
-      - /dev/gpiomem:/dev/gpiomem
     command: ["dev.run.sh"]
     depends_on:
       - django_db
