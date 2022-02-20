@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  django_app:
+    build:
+      context: ./django_app
+    ports:
+      - 8002:8000
+    volumes: 
+      - ./django_app/code:/code
+    command: ["dev.run.sh"]
+
