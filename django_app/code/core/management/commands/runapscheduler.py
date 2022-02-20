@@ -9,10 +9,9 @@ from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.models import DjangoJobExecution
 from django_apscheduler import util
 
-logger=logging.getLogger(__name__)
+from core.pi import read_btn
 
-def read_sensors():
-    print('reading sensors')
+logger=logging.getLogger(__name__)
 
 def delete_old_job_executions(max_age=604_800):
     DjangoJobExecution.objects.delete_old_job_executions(max_age)
@@ -25,13 +24,13 @@ class Command(BaseCommand):
         scheduler.add_jobstore(DjangoJobStore(),"default")
 
         scheduler.add_job(
-            read_sensors,
+            read_btn,
             trigger=CronTrigger(second="*/10"),
-            id="read_sensors",
+            id="read_btn",
             max_instances=1,
             replace_existing=True,
         )
-        logger.info("Added job 'read_sensors'.")
+        logger.info("Added job 'read_btn'.")
 
         scheduler.add_job(
             delete_old_job_executions,

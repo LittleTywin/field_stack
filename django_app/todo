@@ -1,2 +1,4 @@
 wait_for_db refactoring
-django-scheduler (background or another container?)
+django-scheduler
+check if pcre-dev can be removed from final container
+use rest-api for pi-django communication
