@@ -21,13 +21,20 @@ def wait_for_django_server(url,timeout):
     if connection_established:
         print('Connection established!')
         print(f'tries={tries}')
-        time.sleep(10000000)
     else:
         print('Connection unavailable.')
 
-
-if __name__ == "__main__":
+def main():
     host = os.environ.get('DJANGO_HOST')
     port = os.environ.get('DJANGO_PORT')
     post_url = os.environ.get('POST_URL')
     wait_for_django_server(url='http://'+host+':'+port+post_url, timeout=20)
+    while True:
+        time.sleep(5)
+        r=requests.get(url='http://'+host+':'+port+post_url)
+        print(r.status_code)
+        print(r.text)
+
+
+if __name__ == "__main__":
+    main()
