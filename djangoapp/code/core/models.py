@@ -10,8 +10,17 @@ class ButtonSample(models.Model):
 class DataPoint(models.Model):
     timestamp = models.DateTimeField()
     tamper = models.BooleanField()
-    tamperCO = models.IntegerField()
+    tamperco = models.IntegerField()
     burner = models.BooleanField()
-    burnerCO = models.IntegerField()
+    burnerco = models.IntegerField()
     temperature = models.FloatField()
     humidity = models.FloatField()
+
+    def populate(self,data):
+        self.timestamp = data['timestamp']
+        self.burner = data['burner']
+        self.burnerco = data['burnerco']
+        self.temperature = data['temperature']
+        self.tamper = data['tamper']
+        self.tamperco = data['tamperco']
+        self.humidity = data['humidity']

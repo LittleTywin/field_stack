@@ -1,4 +1,3 @@
 wait_for_db refactoring
-use rest-api for pi-django communication
-csrf management for pi post
-create new container for pi stuff
+
+data visualisation

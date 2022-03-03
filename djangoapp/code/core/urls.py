@@ -5,4 +5,5 @@ from . import views
 
 urlpatterns = [
     path('', csrf_exempt(views.index), name='index'),
+    path('api/',csrf_exempt(views.api), name='api')
 ]
