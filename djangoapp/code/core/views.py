@@ -1,17 +1,11 @@
 from django.shortcuts import render
+import json
 
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from core.models import ButtonSample, DataPoint
 
 def index(request):
-    if request.method == 'GET':
-        return HttpResponse("U GOT ME")
-    elif request.method == 'POST':
-        state = bool(int(request.POST.get('state')))
-        sample = ButtonSample()
-        sample.value = state
-        sample.save()
-        return HttpResponse("U POSTED ME")
+    return render(request, 'core/index.html')
 
 def api(request):
     if request.method == 'GET':
@@ -25,3 +19,13 @@ def api(request):
         return HttpResponse(status=204)
     else :
         return Http404
+
+def visual(request):
+
+    is_ajax = request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+    if is_ajax and request.method == 'GET':
+        data = list(DataPoint.objects.order_by('-id')[:10].values())
+        print(data)
+        return JsonResponse({'data':data})
+    
+    return render(request,'core/visual.html')

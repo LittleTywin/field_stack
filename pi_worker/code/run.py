@@ -51,11 +51,11 @@ def main():
     port = os.environ.get('DJANGO_PORT')
     post_url = os.environ.get('POST_URL')
     wait_for_django_server(url='http://'+host+':'+port+post_url, timeout=20)
-    url = 'http://20.20.0.101:8002/core/api/'
+    url = 'http://20.20.0.101:8002/api/'
     while True:
         time.sleep(5)
-        print('posting data')
-        r = requests.post(url, get_data_point())
+        print('posting data NOT REALLY!!')
+        #r = requests.post(url, get_data_point())
         
 
 
