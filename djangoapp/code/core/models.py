@@ -5,6 +5,7 @@ class SampleModel(models.Model):
 
 class SensorStation(models.Model):
     id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=12, default="station")
 class DataPoint(models.Model):
     timestamp = models.DateTimeField()
     tamper = models.BooleanField()
