@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +17,8 @@
       <td>|</td>
       <td><a href="{%url 'core:visual'%}">Visual</a></td>
       <td>|</td>
+      <td><a href="{%url 'core:live'%}">Live</a></td>
+      <td>|</td>
     </tr>
   </table> 
 </head>
@@ -26,6 +29,7 @@
 
     
 </body>
+<script type="text/javascript" src="{% static 'core/js/jquery.js' %}"></script>
 {%block javascript%}
 {%endblock%}
 

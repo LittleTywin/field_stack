@@ -1,18 +1,32 @@
+
 {%extends "core/base.html"%}
+{%load static%}
 
     {%block title%}
         Visualisation page
     {%endblock%}
 
     {%block head%}
-        {%load static%}
+        
     {%endblock%}
 
     {%block body%}
-        <p id="out"></p>
-        <button id="btn">Get Last Point</button>
+    {{stations}}
+    {%csrf_token%}
+        <div>
+            <p id="out"></p>
+            <label for="station_select">Chose a station:</label>
+            <select name="station_select" id="station_select">
+                <option value="-1">all</option>
+                {%for station in stations%}
+                <option value="{{station.id}}">{{station.name}}:{{station.id}}</option>
+                {%endfor%}
+                
+            </select>
+            <button id="btn">Get Last Point</button>
+        </div>
     {%endblock%}
     {%block javascript%}
-        <script type="text/javascript" src="{% static 'core/js/jquery.js' %}"></script>
+        
         <script type="text/javascript" src="{% static 'core/js/visual.js' %}"></script>
     {%endblock%}

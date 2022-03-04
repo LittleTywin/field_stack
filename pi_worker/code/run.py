@@ -54,7 +54,7 @@ def main():
     url='http://'+host+':'+port+post_url
     wait_for_django_server(url, timeout=20)
     while True:
-        time.sleep(30)
+        time.sleep(5)
         print('posting data NOT REALLY!!')
         #r = requests.post(url+'api/', get_data_point(123456789))
         #print(r.status_code)

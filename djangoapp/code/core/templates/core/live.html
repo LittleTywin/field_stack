@@ -1,0 +1,22 @@
+
+{%extends "core/base.html"%}
+{%load static%}
+{%csrf_token%}
+
+    {%block title%}
+        Live page
+    {%endblock%}
+
+    {%block head%}
+        
+    {%endblock%}
+
+    {%block body%}
+    {{stations}}
+    {%csrf_token%}
+        <div id="livediv"></div>
+    {%endblock%}
+    {%block javascript%}
+        
+        <script type="text/javascript" src="{% static 'core/js/live.js' %}"></script>
+    {%endblock%}
