@@ -26,7 +26,7 @@ def wait_for_django_server(url,timeout):
     else:
         print('Connection unavailable.')
 
-def get_data_point():
+def get_data_point(sensorStationID):
     timestamp = datetime.now(tz=pytz.timezone('Europe/Athens'))
     tamper = bool(random.getrandbits(1))
     burner = bool(random.getrandbits(1))
@@ -42,6 +42,7 @@ def get_data_point():
         'burnerco':burnerco, 
         'temperature':temperature,
         'humidity':humidity,
+        'stationid':sensorStationID,
     }
     return data    
 
@@ -50,12 +51,13 @@ def main():
     host = os.environ.get('DJANGO_HOST')
     port = os.environ.get('DJANGO_PORT')
     post_url = os.environ.get('POST_URL')
-    wait_for_django_server(url='http://'+host+':'+port+post_url, timeout=20)
-    url = 'http://20.20.0.101:8002/api/'
+    url='http://'+host+':'+port+post_url
+    wait_for_django_server(url, timeout=20)
     while True:
-        time.sleep(5)
+        time.sleep(30)
         print('posting data NOT REALLY!!')
-        #r = requests.post(url, get_data_point())
+        #r = requests.post(url+'api/', get_data_point(123456789))
+        #print(r.status_code)
         
 
 
